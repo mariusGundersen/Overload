@@ -33,16 +33,20 @@ var overload = (function(){
 		})
 
 		var entry = function(){
-			if(matchesTypes(arguments, typeNames))
+			if(matchesTypes(arguments, typeNames)){
 				func.apply(this, arguments);
+			}else if(entry.fallbackTo && typeof entry.fallbackTo == "function"){
+				entry.fallbackTo.apply(this, arguments);
+			}
 		};
 
 		entry.with = function(){
 
 		};
 
-		entry.fallback = function(){
-
+		entry.fallback = function(func){
+			entry.fallbackTo = func;
+			return entry;
 		};
 
 		return entry;
