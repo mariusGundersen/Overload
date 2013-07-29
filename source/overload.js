@@ -9,7 +9,12 @@ var overload = (function(){
 	}
 	
 	function typeOf(obj) {
-		return ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1];
+		var typeString = ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1];
+		if(typeString == "Object"){
+			return obj.constructor.name;
+		}else{
+			return typeString;
+		}
 	}
 
 	function typeOfArray(types){
@@ -17,16 +22,18 @@ var overload = (function(){
 	}
 
 	function matchesTypes(types, expected){
-		return compareAllElements(expected.map(function(m){
-			return m.name;
-		}),
-		typeOfArray(types));
+		return compareAllElements(expected, typeOfArray(types));
 	}
 
 
 	function createEntry(types, func){
+
+		var typeNames = types.map(function(m){
+			return m.name;
+		})
+
 		var entry = function(){
-			if(matchesTypes(arguments, types))
+			if(matchesTypes(arguments, typeNames))
 				func.apply(this, arguments);
 		};
 

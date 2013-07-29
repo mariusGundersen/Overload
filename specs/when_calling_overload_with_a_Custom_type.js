@@ -1,22 +1,26 @@
-describe("when calling overload with a type", function(){
+describe("when calling overload with a Custom type", function(){
 
 	var method,
 		spy;
+
+	function Custom(){
+
+	}
 
 	beforeEach(function () {
 		spy = sinon.spy();
 
 		because: {
-			method = overload([Number], spy);
+			method = overload([Custom], spy);
 		}
 
 	});
 
-	describe("when calling the returned function with a number", function(){
+	describe("when calling the returned function with an instance of Custom", function(){
 
 		beforeEach(function(){
 			because: {
-				method(1);
+				method(new Custom());
 			}
 		})
 
@@ -30,7 +34,7 @@ describe("when calling overload with a type", function(){
 
 		beforeEach(function(){
 			because: {
-				method("hello");
+				method([]);
 			}
 		})
 
