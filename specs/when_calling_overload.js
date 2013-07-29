@@ -32,6 +32,10 @@ describe("when calling overload", function(){
 			expect(method).toBeA("function");
 		});
 
+		it("the returned function should have a with method", function(){
+			expect(method.with).toBeA("function");
+		});
+
 		describe("when calling the returned function", function(){
 
 			beforeEach(function(){
@@ -60,6 +64,10 @@ describe("when calling overload", function(){
 
 		it("should return a function", function(){
 			expect(method).toBeA("function");
+		});
+
+		it("the returned function should have a with method", function(){
+			expect(method.with).toBeA("function");
 		});
 
 		describe("when calling the returned function", function(){
