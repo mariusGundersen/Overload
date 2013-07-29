@@ -36,6 +36,10 @@ describe("when calling overload", function(){
 			expect(method.with).toBeA("function");
 		});
 
+		it("the returned function should have a fallback method", function(){
+			expect(method.fallback).toBeA("function");
+		});
+
 		describe("when calling the returned function", function(){
 
 			beforeEach(function(){
@@ -68,6 +72,10 @@ describe("when calling overload", function(){
 
 		it("the returned function should have a with method", function(){
 			expect(method.with).toBeA("function");
+		});
+
+		it("the returned function should have a fallback method", function(){
+			expect(method.fallback).toBeA("function");
 		});
 
 		describe("when calling the returned function", function(){

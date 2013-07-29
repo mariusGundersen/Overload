@@ -41,6 +41,10 @@ var overload = (function(){
 
 		};
 
+		entry.fallback = function(){
+
+		};
+
 		return entry;
 	}
 
