@@ -26,30 +26,40 @@ var overload = (function(){
 	}
 
 
-	function createEntry(types, func){
+	function createOverload(types, func){
 
 		var typeNames = types.map(function(m){
 			return m.name;
 		})
 
-		var entry = function(){
+		var fallbackTo = function(){};
+
+		var multiMethod = function(){
 			if(matchesTypes(arguments, typeNames)){
 				func.apply(this, arguments);
-			}else if(entry.fallbackTo && typeof entry.fallbackTo == "function"){
-				entry.fallbackTo.apply(this, arguments);
+			}else{
+				fallbackTo.apply(this, arguments);
 			}
 		};
 
-		entry.with = function(){
-
+		multiMethod.with = function(){
+			if(arguments.length == 0){
+				throw new Error("usage: with([types...], function(){ ... });");
+			}else{
+				return multiMethod;
+			}
 		};
 
-		entry.fallback = function(func){
-			entry.fallbackTo = func;
-			return entry;
+		multiMethod.fallback = function(func){
+			if(func && typeof func == "function"){
+				fallbackTo = func;
+				return multiMethod;
+			}else{
+				throw new Error("usage: fallback(function(){ ... });");
+			}
 		};
 
-		return entry;
+		return multiMethod;
 	}
 
 	function overload(){
@@ -57,9 +67,9 @@ var overload = (function(){
 		if(arguments.length == 0){
 			throw new Error("usage: overload(function) or overload(array, function)");
 		}else if(arguments.length == 1){
-			return createEntry([], arguments[0]);
+			return createOverload([], arguments[0]);
 		}else if(arguments.length == 2){
-			return createEntry(arguments[0], arguments[1]);
+			return createOverload(arguments[0], arguments[1]);
 		}
 	}
 

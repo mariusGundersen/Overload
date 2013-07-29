@@ -1,24 +1,24 @@
-describe("when calling overload.fallback", function(){
+describe("when calling overload.with", function(){
 
 	var overloadResult,
-		fallbackResult;
+		withResult;
 
 	beforeEach(function(){
-		overloadResult = overload(sinon.spy());
+		overloadResult = overload([String], sinon.spy());
 
-		fallbackResult = overloadResult.fallback(sinon.spy());
+		withResult = overloadResult.with([Number], sinon.spy());
 	});
 
 	it("should return the same function as overload returned", function(){
-		expect(fallbackResult).toBe(overloadResult);
+		expect(withResult).toBe(overloadResult);
 	});
+
 
 	describe("with no arguments", function(){
 		it("should throw an error", function(){
 			expect(function(){
-				overload(sinon.spy()).fallback();
+				overload(sinon.spy()).with();
 			}).toThrow();
 		});
 	});
-
 });
