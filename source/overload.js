@@ -51,7 +51,7 @@ var overload = (function(){
 		};
 
 		multiMethod.fallback = function(func){
-			if(func && typeof func == "function"){
+			if(typeOf(func) == "Function"){
 				fallbackTo = func;
 				return multiMethod;
 			}else{
@@ -64,12 +64,12 @@ var overload = (function(){
 
 	function overload(){
 
-		if(arguments.length == 0){
-			throw new Error("usage: overload(function) or overload(array, function)");
-		}else if(arguments.length == 1){
+		if(arguments.length == 1 && typeOf(arguments[0]) == "Function"){
 			return createOverload([], arguments[0]);
-		}else if(arguments.length == 2){
+		}else if(arguments.length == 2 && typeOf(arguments[0]) == "Array" && typeOf(arguments[1]) == "Function"){
 			return createOverload(arguments[0], arguments[1]);
+		}else{
+			throw new Error("usage: overload(function) or overload(array, function)");
 		}
 	}
 

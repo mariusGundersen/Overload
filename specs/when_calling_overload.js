@@ -18,6 +18,38 @@ describe("when calling overload", function(){
 
 	});
 
+
+	describe("with one wrong argument", function(){
+
+		it("should throw an exception", function(){
+			expect(function(){
+				overload("hello");
+			}).toThrow();
+		});
+
+	});
+
+
+	describe("with one of two wrong argument", function(){
+
+		it("should throw an exception", function(){
+			expect(function(){
+				overload("hello", function(){ });
+			}).toThrow();
+		});
+
+	});
+
+	describe("with two wrong arguments", function(){
+
+		it("should throw an exception", function(){
+			expect(function(){
+				overload("hello", true);
+			}).toThrow();
+		});
+
+	});
+
 	describe("with one function argument", function(){
 
 		beforeEach(function(){
