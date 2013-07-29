@@ -19,7 +19,7 @@ var createPerson = overload([String], function(name){
 
 createPerson("JavaScript") //returns 'name: JavaScript'
 createPerson("JavaScript", 18) //returns 'name: JavaScript, age: 18'
-createPerson("JavaScript, 18, function(name, age){
+createPerson("JavaScript", 18, function(name, age){
 	return "age: "+age+", name: "+name;
 }) //returns 'age: 18, name: JavaScript'
 
