@@ -15,8 +15,8 @@ describe("when chaining using with", function(){
 		spy4 = sinon.stub().returns("result4");
 
 		method = overload([String], spy1);
-		method.with([Number], spy2);
-		method.with([Array, Function], spy3);
+		method.when([Number], spy2);
+		method.when([Array, Function], spy3);
 		method.fallback(spy4);
 
 	});

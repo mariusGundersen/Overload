@@ -4,7 +4,7 @@
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'specs/libs/sinon-1.3.4.js',
+  'specs/libs/*.js',
   'specs/matchers.js',
   'specs/*.js',
   'source/*.js'

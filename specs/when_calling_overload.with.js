@@ -6,7 +6,7 @@ describe("when calling overload.with", function(){
 	beforeEach(function(){
 		overloadResult = overload([String], sinon.spy());
 
-		withResult = overloadResult.with([Number], sinon.spy());
+		withResult = overloadResult.when([Number], sinon.spy());
 	});
 
 	it("should return the same function as overload returned", function(){
@@ -17,7 +17,7 @@ describe("when calling overload.with", function(){
 	describe("with no arguments", function(){
 		it("should throw an error", function(){
 			expect(function(){
-				overload(sinon.spy()).with();
+				overload(sinon.spy()).when();
 			}).toThrow();
 		});
 	});

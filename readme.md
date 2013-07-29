@@ -9,9 +9,9 @@ Create a mathod taking different types and number of arguments by calling overlo
 ```javascript
 var createPerson = overload([String], function(name){
 	return "name: "+name;
-}).with([String, Number], function(name, age){
+}).when([String, Number], function(name, age){
 	return "name: "+name+", age: "+age;
-}).with([String, Number, Function], function(name, age, callback){
+}).when([String, Number, Function], function(name, age, callback){
 	return callback(name, age);
 });
 
@@ -25,7 +25,7 @@ createPerson("JavaScript, 18, function(name, age){
 
 ```
 
-### fallback
+### Fallback
 
 If nothing matches, a fallback function will be called:
 
@@ -38,6 +38,28 @@ var myMethod = overload([String], function(value){
 
 
 myMethod() //throws error
+
+```
+
+### Constructors
+
+You can create your own instances and use the constructor to match
+
+```javascript
+function Person(name, age){
+	this.name = name;
+	this.age = age;
+}
+
+var getAge = overload([Person], function(person){
+	return person.age
+}).when([Number], function(age){
+	return age;
+});
+
+
+getAge(new Person("JavaScript", 18)) //returns 18
+getAge(18) //returns 18
 
 ```
 

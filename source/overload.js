@@ -6,7 +6,7 @@
             return (root.overload = factory());
         });
     } else if (typeof exports === 'object') {
-        // Node. Does not work with strict CommonJS, but
+        // Node. Does not work when strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
         module.exports = factory(require());
@@ -16,6 +16,10 @@
     }
 }(this, function () {
 
+	function objectName(m){
+		return m.name || m.toString().match(/function\s+([^(]+)/)[1];
+	}
+	
 	function compareAllElements(arr1, arr2){
 		if(arr1.length != arr2.length) return false;
 		for(var i=0; i<arr1.length; i++){
@@ -27,7 +31,7 @@
 	function typeOf(obj) {
 		var typeString = ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1];
 		if(typeString == "Object"){
-			return obj.constructor.name;
+			return objectName(obj.constructor);
 		}else{
 			return typeString;
 		}
@@ -60,19 +64,17 @@
 			return fallbackTo.apply(this, arguments);
 		};
 
-		multiMethod.with = function(types, func){
+		multiMethod.when = function(types, func){
 			if(arguments.length == 2 && typeOf(arguments[0]) == "Array" && typeOf(arguments[1]) == "Function"){
 
-				var typeNames = types.map(function(m){
-					return m.name;
-				});
+				var typeNames = types.map(objectName);
 
 				entries.push({types: typeNames, func: func});
 
 
 				return multiMethod;
 			}else{
-				throw new Error("usage: with([types...], function(){ ... });");
+				throw new Error("usage: when([types...], function(){ ... });");
 			}
 		};
 
@@ -91,9 +93,9 @@
 	function overload(){
 
 		if(arguments.length == 1 && typeOf(arguments[0]) == "Function"){
-			return createOverload().with([], arguments[0]);
+			return createOverload().when([], arguments[0]);
 		}else if(arguments.length == 2 && typeOf(arguments[0]) == "Array" && typeOf(arguments[1]) == "Function"){
-			return createOverload().with(arguments[0], arguments[1]);
+			return createOverload().when(arguments[0], arguments[1]);
 		}else{
 			throw new Error("usage: overload(function) or overload(array, function)");
 		}
