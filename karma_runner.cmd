@@ -1,1 +1,1 @@
-node_modules\.bin\karma start --dots
+tools\node.exe "node_modules/karma/bin/karma" start --dots

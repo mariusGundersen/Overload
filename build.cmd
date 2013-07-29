@@ -1,0 +1,1 @@
+tools\node.exe "node_modules/uglify-js/bin/uglifyjs" source\overload.js -o "lib/overload.js" --source-map "lib/overload.map.js"
