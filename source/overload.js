@@ -26,27 +26,37 @@ var overload = (function(){
 	}
 
 
-	function createOverload(types, func){
+	function createOverload(){
 
-		var typeNames = types.map(function(m){
-			return m.name;
-		})
+
+		var entries = [];
 
 		var fallbackTo = function(){};
 
 		var multiMethod = function(){
-			if(matchesTypes(arguments, typeNames)){
-				func.apply(this, arguments);
-			}else{
-				fallbackTo.apply(this, arguments);
+
+			for(var i=0; i<entries.length; i++){
+				if(matchesTypes(arguments, entries[i].types)){
+					return entries[i].func.apply(this, arguments);
+				}	
 			}
+
+			return fallbackTo.apply(this, arguments);
 		};
 
-		multiMethod.with = function(){
-			if(arguments.length == 0){
-				throw new Error("usage: with([types...], function(){ ... });");
-			}else{
+		multiMethod.with = function(types, func){
+			if(arguments.length == 2 && typeOf(arguments[0]) == "Array" && typeOf(arguments[1]) == "Function"){
+
+				var typeNames = types.map(function(m){
+					return m.name;
+				});
+
+				entries.push({types: typeNames, func: func});
+
+
 				return multiMethod;
+			}else{
+				throw new Error("usage: with([types...], function(){ ... });");
 			}
 		};
 
@@ -65,9 +75,9 @@ var overload = (function(){
 	function overload(){
 
 		if(arguments.length == 1 && typeOf(arguments[0]) == "Function"){
-			return createOverload([], arguments[0]);
+			return createOverload().with([], arguments[0]);
 		}else if(arguments.length == 2 && typeOf(arguments[0]) == "Array" && typeOf(arguments[1]) == "Function"){
-			return createOverload(arguments[0], arguments[1]);
+			return createOverload().with(arguments[0], arguments[1]);
 		}else{
 			throw new Error("usage: overload(function) or overload(array, function)");
 		}
