@@ -16,7 +16,7 @@
     }
 }(this, function () {
 
-	function objectName(m){
+	function functionName(m){
 		return m.name || m.toString().match(/function\s+([^(]+)/)[1];
 	}
 	
@@ -31,7 +31,7 @@
 	function typeOf(obj) {
 		var typeString = ({}).toString.call(obj).match(/\s([a-zA-Z]+)/)[1];
 		if(typeString == "Object"){
-			return objectName(obj.constructor);
+			return functionName(obj.constructor);
 		}else{
 			return typeString;
 		}
@@ -67,7 +67,7 @@
 		multiMethod.when = function(types, func){
 			if(arguments.length == 2 && typeOf(arguments[0]) == "Array" && typeOf(arguments[1]) == "Function"){
 
-				var typeNames = types.map(objectName);
+				var typeNames = types.map(functionName);
 
 				entries.push({types: typeNames, func: func});
 
