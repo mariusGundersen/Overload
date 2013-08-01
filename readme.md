@@ -10,7 +10,7 @@ Create a mathod taking different types and number of arguments by calling overlo
 var createPerson = overload([String], function(name){
 	return "name: "+name;
 }).when([String, Number], function(name, age){
-	return "name: "+name+", age: "+age;
+	return createPerson(name)+", age: "+age;
 }).when([String, Number, Function], function(name, age, callback){
 	return callback(name, age);
 });
