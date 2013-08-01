@@ -1,1 +1,1 @@
-tools\node.exe "node_modules/uglify-js/bin/uglifyjs" source\overload.js -o "lib/overload.js" --source-map "lib/overload.map.js"
+tools\node.exe "node_modules/closurecompiler\bin\ccjs" source\overload.js --create_source_map=lib\overload.min.js.map > lib\overload.min.js
