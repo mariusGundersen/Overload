@@ -1,0 +1,15 @@
+{
+	"name": "Overload",
+	"version": "0.1.0",
+	"main": "lib/overload.min.js",
+	"ignore": [
+		"**/.*",
+		"**/*.cmd",
+		"/*.js",
+		"node_modules",
+		"bower_components",
+		"specs",
+		"tools"
+	],
+	"_source": "git://github.com/mariusgundersen/Overload.git"
+}
