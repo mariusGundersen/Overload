@@ -1,26 +1,26 @@
+module.exports = function(config){
+	config.set({
+	
+		files: [
+		  'specs/libs/*.js',
+		  'specs/matchers.js',
+		  'specs/*.js',
+		  'source/*.js'
+		],
 
+		frameworks: [
+		  'jasmine'
+		],
+		
+		exclude: [
 
-// list of files / patterns to load in the browser
-files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'specs/libs/*.js',
-  'specs/matchers.js',
-  'specs/*.js',
-  'source/*.js'
-];
+		],
+		
+		reporters: [
+			'dots'
+		],
 
-// list of files to exclude
-exclude = [
+		autoWatch: true
 
-];
-
-reporters = ['dots'];
-
-autoWatch = true;
-
-/*browser = [
-	"Chrome",
-	"Firefox",
-	"IE"
-];*/
+	});
+};
