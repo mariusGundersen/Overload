@@ -1,9 +1,20 @@
 {
-	"name": "Overload",
+	"name": "overloadjs",
+	"description": "overload functions depending on the type using a multimethod",
+	"keywords": ["overload", "multimethod"],
+	"author": {
+		"name": "Marius Gundersen",
+		"email": "npm@mariusgundersen.net",
+		"url": "http://mariusgundersen.net"
+	},
 	"version": "0.1.0",	
 	"devDependencies": {
 		"karma": "latest",
 		"closurecompiler": "latest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "http://github.com/mariusgundersen/overload"
 	}
 
 }
