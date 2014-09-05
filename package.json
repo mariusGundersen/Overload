@@ -7,7 +7,7 @@
 		"email": "npm@mariusgundersen.net",
 		"url": "http://mariusgundersen.net"
 	},
-	"version": "0.1.0",	
+	"version": "0.3.0",	
 	"devDependencies": {
 		"karma": "latest",
 		"closurecompiler": "latest"
