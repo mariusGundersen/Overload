@@ -1,6 +1,7 @@
 {
 	"name": "overloadjs",
 	"description": "overload functions depending on the type using a multimethod",
+	"main": "source/overload.js",
 	"keywords": ["overload", "multimethod"],
 	"author": {
 		"name": "Marius Gundersen",
